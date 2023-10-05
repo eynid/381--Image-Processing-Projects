@@ -1,3 +1,9 @@
+/******************
+
+The focus of this project was to understand the basics of morphology and 
+how to manipulate images. 
+
+******************/
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -9,10 +15,12 @@ class Morphology{
     int structrow, structcol;
     int rowOrigin, colOrigin, rowFrame, colFrame;
     int extraRow, extraCol, rowSize, colSize;
+
     int ** tempAry;
     int ** zeroFramedAry;
     int ** morphAry;
     int ** structAry;
+///*** Two extra arrays as temporary placeholders for all the extra limbs. 
     int ** limbHolder;
     int ** bodyHolder;
     
@@ -279,12 +287,14 @@ int main (int argc, char* argv[]){
     MorphCall->prettyPrint(MorphCall->morphAry, outFile, MorphCall->rowSize, MorphCall->colSize);
 
 
-    //TASK 2 THIS TESTING ME FRFR EASY?? BIGGEST LIE I EVER HEARD!!! if i dont get a 100% on this i am gonna freak
+    //TASK 2
+    //In addition to the general idea of morphology, this task is selected from two options, the task I picked
+    //Involves mimg2.txt, the goal of this image is to separate all possible limbs from the whole body.
      //Temp Array - Holds the limbs. 
      //Morph Array - Holds the head and body. 
      //Zero Frame - Holds the Entire Image. 
      //In order to obtain the head, i would need to use another structuring element to isolate the body. 
-     //In Total, I would need 3 separate structuring elements to isolate all of the limbs. Why did i pick task 2??? this sucks
+     //In Total, I would need 3 separate structuring elements to isolate all of the limbs.
 
     int sRow, sCol;
     int iRow, iCol, imin, imax;
@@ -293,6 +303,9 @@ int main (int argc, char* argv[]){
     oneStruct >> sRow >> sCol >> rOrigin >> cOrigin;
 
     Morphology * imgStruct = new Morphology(iRow, iCol, sRow, sCol, rOrigin, cOrigin);
+    //Set the array to 0, load image, and print. Generally speaking there might be a better way to structure all of this,
+    // but I'll think of a method.
+    // 
     imgStruct->zero2DAry(imgStruct->zeroFramedAry, imgStruct->rowSize, imgStruct->colSize);
     imgStruct->loadImg(imageTwo, imgStruct->zeroFramedAry);
     outFile2 << "Data Picture \n"; 
